@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Complaint</title>
+
+
+<style>
+#faq{
+margin:17px;
+
+}
+	.one{
+				border:2px solid black;
+				border-radius:13px;
+				width:560px;
+				margin:2% 30% 2% 30% ;
+			}
+	button{
+				width:49%;
+				border:none;
+				text-align:center;
+				color:white;
+				text-decoration: none;
+				background-color:#7077d4 ;
+				font-size: 16px;
+				cursor: pointer;
+				padding:10px
+			}
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+
+	ul li{
+		float:left;
+	}
+	ul li a, log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.head{
+	display:inline-block;
+	width:95%;
+	background-color:#7077d4;
+	color:white;
+	border-radius:20px;
+	margin:20px 30px;
+	padding: 0px 10px;
+	font-size:15px;
+	}
+	
+	.contact{
+		margin-left:50px;
+	}
+	.subcontact{
+		margin-left:50px;
+		padding:20px;
+		background-color:#f7e4e1;
+	}
+	
+	.feedback{
+		border:none;
+		border-bottom:1px solid #ccc;
+		outline:none;
+		width:60%;
+		padding:20px;
+	}
+.comp{
+padding:10px;
+}
+
+.center{
+border:1px solid black;
+background-color:#ced0f2;
+border-radius:7px;
+margin: 0 auto;
+width: 50%;
+}
+
+</style>
+<script>
+			function displayFeedback(){
+				document.getElementById("complaintContainer").style.display="none";
+			}
+
+			function displayComplaint(){
+				document.getElementById("complaintContainer").style.display="block";
+			}
+			function validateComplaint(){
+				var typ = document.getElementById("complaintType").value;
+				var desc = document.getElementById("complaintDesc").value;
+				var rmnum = document.getElementById("roomNumber").value;
+				var contact = document.getElementById("cont").value;
+				var cID = document.getElementById("custID").value;
+				
+				if(typ == "none"){
+					alert("Select Type of Complaint");
+					return false;
+				}else if(desc.length <5){
+					alert("Enter Description of Complaint");
+					return false;
+				}else if(rmnum.length <2){
+					alert("Enter Room Number");
+					return false;
+				}else if(!contact.match(/^[6-9]{1}[0-9]{9}$/)){
+					alert("Enter valid Mobile Number");
+					return false;
+				}else if(cID.length < 3){
+					alert("Enter Customer Number");
+					return false;
+				}else{
+					alert("Complaint Received.");
+					return true;
+				}
+			}
+			function validateFeedback(){
+				
+			}
+		</script>
+</head>
+
+
+<body>
+
+<ul>
+	<li><a href="/home">Home</a></li>
+	<li><a href="/reservation">Reservation</a></li>
+	<li><a href="/billing">Billing Page</a></li>
+	<li><a href="/bookinghistory">History</a></li>
+	<li><a href="/upcomingbookings">Bookings</a></li>
+
+	<li><a class="active" href="#">Contact Support</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+
+<div id="buttonContainer">
+			<p align="center" class="head comp">Complaint</p>
+</div>
+<br>
+
+<div id="complaintContainer">
+			<form id="complaintForm" method="POST" action="/updateComplaint" onsubmit="return validateComplaint()">
+			<div class="center">
+				<table align="center" cellspacing=5px cellpadding=10px>
+					<tr>
+						<td align=right>Type of Complaint</td>
+						<td><select id="complaintType" onchange="typeChangeEvent()">
+						<option value="none">--select--</option>
+						<option value="hospitality">Hospitality or behavior of Staff</option>
+						<option value="cleanliness">Cleanliness of Facilities</option>
+						<option value="housekeeping">Housekeeping Facilities</option>
+						<option value="food">Quality of Food</option>
+						<option value="others">Others</option></select></td>
+					</tr>
+					<tr>
+						<td align=right>Description of Complaint</td>
+						<td><textarea id="complaintDesc"></textarea></td>
+					</tr>
+					<tr>
+						<td align=right>Room Number</td>
+						<td><input type="text" id="roomNumber"/></td>
+					</tr>
+					<tr>
+						<td align=right>Customer Contact Number</td>
+						<td><input type="text" id="cont"/></td>
+					</tr>
+					<tr>
+						<td align=right>Customer ID</td>
+						<td><input type="text" id="custID"/></td>
+					</tr>
+					<tr>
+						<td  align=right><input type="submit"/></td>
+						<td><input type="reset"/></td>
+					</tr>
+				</table>
+				</div>
+			</form>
+		</div>
+</body>
+</html>

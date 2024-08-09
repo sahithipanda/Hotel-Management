@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head><title>Admin Home</title>
+<style>
+	
+	.container{
+		text-align:center;
+		padding:20px 40px;
+		display:inline-block;
+	}
+	.intro{
+		float:left;
+		width:50%;
+	}
+	
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #c92647;
+		font-weight:bold;
+	}
+
+	li{
+		float:left;
+	}
+	li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active) {
+  		background-color: #e87272;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+
+</style>
+<script>
+    {% if (costUpd) %}
+        alert("Updated Successfully.")
+    {% endif %}
+</script>
+
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+
+  <li><a href="/adminReservation">Reservation</a></li>
+  <li><a href="/adminBilling">Billing Page</a></li>
+  <li><a href="/adminServices">Services</a></li>
+  <li><a href="/adminHistory">History</a></li>
+  
+  <li><a href="/adminBookings">Bookings</a></li>
+  <li><a href="/adminRoomStatus">Room Status</a></li>
+  <li><a href="/adminContactSupport">Contact Support/Feedback</a></li>
+  <li><a href="/adminCosts">Costs</a></li>
+  <li><a href="/logout">Logout</a></li>
+  <li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+</ul>
+	<div class="container">
+		<div class="intro">
+			<img src="https://tse2.mm.bing.net/th/id/OIP.gawUv7Tg7R3amnWgoNmefgHaF2?rs=1&pid=ImgDetMain" alt="Hotel Image">
+		</div>
+		<div class="intro">
+			
+			<p style="padding-top:100px;font-size:50px; color:#e87272; "><b><i> "Admin Page"</i></b></p>
+		</div>
+
+	</div>
+<br><br>
+
+</body>
+</html>

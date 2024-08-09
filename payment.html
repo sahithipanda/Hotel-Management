@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+
+<head><title>Payment</title>
+
+<style>
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+
+	li{
+		float:left;
+	}
+	li a, log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.container{
+		margin:50px 10px;
+	}
+
+	.bill{
+		
+		margin:30px 180px;
+		padding:20px;
+		width:60%;
+	}
+	.heading{
+		padding:10px;
+		font-size:15px;
+	}
+
+	.info{
+		padding:3px 10px;
+	}
+	
+	table{
+		border-collapse:collapse;
+		background-color:#d5ded8;
+	}
+	button{
+		background-color:#03a9fc;
+		margin-left:300px;
+		width:10%;
+		color:white;
+		border:none;
+		border-radius:30px;
+	}
+	.pay{
+		display: block;
+  		color: white;
+  		padding: 10px 10px;
+  		text-decoration: none;
+	}
+	.head{
+	display:inline-block;
+	width:95%;
+	background-color:#7077d4;
+	color:white;
+	border-radius:20px;
+	margin:20px 30px;
+	padding: 0px 10px;
+	font-size:15px;
+	}
+</style>
+
+</head>
+
+<body>
+
+<ul>
+	<li><a href="/home">Home</a></li>
+	<li><a href="/reservation">Reservation</a></li>
+	<li><a class="active" href="#">Billing Page</a></li>
+	<li><a href="/bookinghistory">History</a></li>
+	<li><a href="/upcomingbookings">Bookings</a></li>
+	
+	<li><a href="/contactsupport">Contact Support</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+<div class="head">	
+	<p><b>Payment</b></p>
+</div>
+
+<div class="container">
+<form id="modeform"  method="post" action="/paymentmode">
+<input type"text" value="{{totalbill}}" name="totalbill" style="display:none;"/> 
+<input type="text" value="{{Reservation_ID}}" name="Reservation_ID" style="display:none;"/>
+	<div class="bill">
+	<table style="width:100%;">
+		<tr style="background-color:#868f89;">
+			<td style="font-size:20px;padding:10px;color:white;"><strong> Total Bill</strong></td>
+			<td style="float:right;padding:10px;color:white;">{{totalbill}}</td>
+		</tr>
+		<tr>
+			<td class="heading"><b>Mode of Payment<b></td>
+		</tr>
+		<tr>
+			<td class="heading"><input type="radio" id="credit" name="mode" value="credit" required><label for="credit">Credit</label></td>
+			<td class="heading"><input type="radio" id="debit" name="mode" value="debit" required><label for="debit">Debit</label></td>
+		</tr>
+		
+	</table>
+	</div>
+	<button class="pay" style="float:left;"><b>Pay Now</b></a></button>
+	<a class="pay" style="float:left;background-color:#03a9fc;margin-left:300px;padding:9px 15px;
+		color:white;
+		border:none;
+		border-radius:30px;text-decoration:none;" href="/home"><b>Go to Home</b></a>
+</form>	
+
+	
+
+
+</body>
+</html>

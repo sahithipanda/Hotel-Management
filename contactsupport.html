@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact Support</title>
+
+<style>
+#faq{
+margin:17px;
+
+}
+	.one{
+				border:2px solid black;
+				border-radius:13px;
+				width:560px;
+				margin:2% 30% 2% 30% ;
+			}
+	
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+
+	ul li{
+		float:left;
+	}
+	ul li a, log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.head{
+	display:inline-block;
+	width:95%;
+	background-color:#7077d4;
+	color:white;
+	border-radius:20px;
+	margin:20px 30px;
+	padding: 0px 10px;
+	font-size:15px;
+	}
+	
+	.contact{
+		margin-left:50px;
+	}
+	.subcontact{
+		margin-left:50px;
+		padding:20px;
+		background-color:#f7e4e1;
+	}
+.two{
+padding:10px;
+border:2px solid black;
+}
+	
+	
+</style>
+<script>
+			function displayFeedback(){
+				document.getElementById("feedbackContainer").style.display="block";
+			}
+
+			function displayComplaint(){
+				document.getElementById("feedbackContainer").style.display="none";
+				
+			}
+			
+			function validateFeedback(){
+				
+			}
+		</script>
+</head>
+<body>
+
+<ul>
+	<li><a href="/home">Home</a></li>
+	<li><a href="/reservation">Reservation</a></li>
+	<li><a href="/billing">Billing Page</a></li>
+	<li><a href="/bookinghistory">History</a></li>
+	<li><a href="/upcomingbookings">Bookings</a></li>
+
+	<li><a class="active" href="#">Contact Support</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+<div class="head">	
+	<p><b>Contact Support</b></p>
+</div>
+<div class="one">
+			<h3 id="faq"><u>For any Queries</u></h3>
+			<ol type="a">
+				<li>Contact number: +91 <a style="color:blue;" href="#">7679879876</a></li>
+				<li>Mail id: <a style="color:blue;" href="#">abc@gmail.com</a></li>
+				<li>Address: 1-23-1-4, SIPCOT IT Park, siruseri, Tamilnadu,786876 </li>
+			</ol>
+</div>
+<div id="buttonContainer" >
+			<p align="center" class="head two">Feedback</p>
+</div>
+<br>
+<div id="feedbackContainer" >
+			<form id="feedbackForm" method="POST" action="/updateFeedback" onsubmit="return validateFeedback()">
+				<table align=center cellpadding=10px cellspacing=5px>
+					<tr>
+						<td>How would you rate the speed and efficiency of our hotel website?</td>
+						<td><input type="radio" id="r11" name="rate1" value="1" required>
+							<label for="r11">Good</label>
+							<input type="radio" id="r12" name="rate1" value="0">
+							<label for="r12">Average</label>
+							<input type="radio" id="r13" name="rate1" value="-1">
+							<label for="r13">Bad</label></td>
+					</tr>
+					<tr>
+						<td>How would you rate the efficiency and speed of the check-in process?</td>
+						<td><input type="radio" id="r21" name="rate2" value="1" required>
+							<label for="r21">Good</label>
+							<input type="radio" id="r22" name="rate2" value="0">
+							<label for="r22">Average</label>
+							<input type="radio" id="r23" name="rate2" value="-1">
+							<label for="r23">Bad</label></td>
+					</tr>
+					<tr>
+						<td>How would you rate the overall experience of your stay?</td>
+						<td><input type="radio" id="r31" name="rate3" value="1" required>
+							<label for="r31">Good</label>
+							<input type="radio" id="r32" name="rate3" value="0">
+							<label for="r32">Average</label>
+							<input type="radio" id="r33" name="rate3" value="-1">
+							<label for="r33">Bad</label></td>
+					</tr>
+					<tr>
+						<td>How would you rate the cleanliness and maintenance of the facilities at our hotel?</td>
+						<td><input type="radio" id="r41" name="rate4" value="1" required>
+							<label for="r41">Good</label>
+							<input type="radio" id="r42" name="rate4" value="0">
+							<label for="r42">Average</label>
+							<input type="radio" id="r43" name="rate4" value="-1">
+							<label for="r43">Bad</label></td>
+					</tr>
+					<tr>
+						<td>Do you agree that the hotel amenities were easily accessible and convenient to use?</td>
+						<td><input type="radio" id="r51" name="rate5" value="1" required>
+							<label for="r51">Agree</label>
+							<input type="radio" id="r52" name="rate5" value="0">
+							<label for="r52">Neutral</label>
+							<input type="radio" id="r53" name="rate5" value="-1">
+							<label for="r53">Disagree</label></td>
+					</tr>
+					<tr>
+						<td>How satisfied were you with the quality of the food served at the hotel's restaurant?</td>
+						<td><input type="radio" id="r61" name="rate6" value="1" required>
+							<label for="r61">Good</label>
+							<input type="radio" id="r62" name="rate6" value="0">
+							<label for="r62">Average</label>
+							<input type="radio" id="r63" name="rate6" value="-1">
+							<label for="r63">Bad</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><textarea id="feed" name="feed" placeholder="Any other Feedback?" style="width: 750px; height: 50px;"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan=2 align=center><input type="submit"</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+</body>
+</html>

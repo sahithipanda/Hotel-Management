@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+
+<head><title>Pending Payments</title>
+
+<style>
+	
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+
+	li{
+		float:left;
+	}
+	li a , log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.container{
+		margin:10px 10px;
+	}
+
+	
+	.heading{
+		padding:10px;
+		font-size:15px;
+	}
+
+	
+		
+	button{
+		background-color:#03a9fc;
+		
+		width:100%;
+		color:white;
+		border:none;
+		border-radius:3px;
+	}
+	.pay{
+		display: block;
+  		color: white;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	.head{
+	display:inline-block;
+	width:10%;
+	border-bottom:3px solid #7C7676;
+	color:#696969;
+	margin:10px 20px;
+	font-size:15px;
+	margin-bottom:30px;
+	}
+	
+	table{
+		width:100%;
+		border-collapse:collapse;
+		margin-left:30px;
+		margin-top:20px;
+		padding:10px;
+	}
+	table th{background-color:#FFEAEA;padding:10px 30px;}
+	td{text-align:center;padding:10px;border-bottom:1px solid #DBD5D5;}
+	
+</style>
+
+</head>
+
+<body>
+
+<ul>
+	<li><a href="/home">Home</a></li>
+	<li><a href="/reservation">Reservation</a></li>
+	<li><a class="active" href="#">Billing Page</a></li>
+	<li><a href="/bookinghistory">History</a></li>
+	<li><a href="/upcomingbookings">Bookings</a></li>
+	
+	<li><a href="/contactsupport">Contact Support</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+<div class="container">
+	<div class="head">	
+	<p><b>Pending Payments</b></p>
+</div>
+<div id="errMsg" style="display: none;">No Pending Payments</div>
+<table id=reservations" style="display: none;">
+
+<thead>
+<tr style="border-bottom:2px solid black;">
+	<th>Reservation ID</th>
+	<th>Booking Date</th>
+	<th>Check-in Date</th>
+	<th>Check-out Date</th>
+	<th>Room Type</th>
+	<th>Action</th>
+</tr>
+
+</thead>
+<tbody>
+	{% for reservation in reservations %}
+	<tr>
+		<td>{{reservation[0]}}</td>
+		<td>{{reservation[1]}}</td>
+		<td>{{reservation[2]}}</td>
+		<td>{{reservation[3]}}</td>
+		<td>{{reservation[4]}}</td>
+		<td><form  method="post">
+			<input type="hidden" name="Reservation_ID" value="{{reservation[0]}}">
+			<button type="submit">Pay Now</button>
+		</form>
+		</td>
+	</tr>
+	{% endfor %}		
+
+</tbody>
+</table>
+
+{% if err %}
+	<script>
+		document.getElementById("errMsg").style.display="block";
+	</script>
+{% else %}
+	<script>
+		document.getElementById("reservations").style.display="block";
+	</script>
+{% endif %}
+
+<script>
+
+<!--
+	<div class="bill">
+	<table style="width:100%;">
+		<tr style="background-color:#868f89;">
+			<td style="font-size:20px;padding:10px;color:white;"><strong> Total Bill</strong></td>
+			<td style="float:right;padding:10px;color:white;">xxxx.xx</td>
+		</tr>
+		<tr>
+			<td class="heading"><b>Room Charges<b></td>
+		</tr>
+		<tr>
+			<td class="info">Room Type</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		<tr>
+			<td class="info">Number of Days</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		<tr style="border-bottom:1px solid black;">
+			<td class="info"><b>Sub Total</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		<tr>
+			<td class="heading"><b>Additional Services<b></td>
+		</tr>
+		<tr>
+			<td class="info">Room Service</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		<tr>
+			<td class="info">Laundry</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		<tr style="border-bottom:1px solid black;">
+			<td class="info"><b>Total Additional Services</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		<tr>
+			<td class="heading"><b>Taxes<b></td>
+		</tr>
+		<tr>
+			<td class="info">GST</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		<tr>
+			<td class="info"><b>Total Taxes</td>
+			<td class="info" style="float:right;">xxxx.xx</td>
+		</tr>
+		
+	</table>
+	</div>
+	
+	<button><a class="pay" href="payment.html"><b>Pay Bill</b></a></button>
+ 
+	-->
+</script>
+
+</body>
+</html>

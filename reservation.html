@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+
+<head>
+
+
+<title>Reservation Form</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+
+	li{
+		float:left;
+	}
+	li a, log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.head{
+	display:inline-block;
+	width:95%;
+	background-color:#7077d4;
+	color:white;
+	border-radius:20px;
+	margin:20px 30px;
+	padding: 0px 10px;
+	font-size:15px;
+	}
+	
+	input[type="date"]{
+		border:none;
+		border-bottom: 1px solId #ccc;
+		width:60%;
+		padding:10px;
+	}
+	label{
+		width:100px;
+		padding-left:10px;
+	}
+	input{
+		border: none;
+        	outline:none;
+        	border-bottom: 1px solid #ccc;
+		padding-bottom:10px;
+		padding-top:10px;
+		margin-left:10px;
+		width:60%; 
+		text-align:left;
+	}
+	
+	select{
+		padding:10px;
+		width:60%;
+		border:none;
+		border-bottom:1px solid #ccc;
+	}
+
+	.formbox{
+		margin-top:40px;
+		width:60%;
+		margin-left:250px;
+		margin-right:10px;
+		display:inline-block;
+		padding:40px 0px 10px 60px;
+ 		box-shadow: 5px 5px 20px #aeaeae;
+		text-align:left;
+		font-weight:bold;
+	}
+
+	button{
+		background-color:#7077d4;
+		margin-left:250px;
+		margin-top:60px;
+		padding:10px;
+		width:25%;
+		color:white;
+		border:none;
+		border-radius:20px;
+	}
+</style>
+<script>
+	function validateForm(){
+		var checkindate=new Date(document.getElementById("checkindate").value);
+		var checkoutdate=new Date(document.getElementById("checkoutdate").value);
+		var today=new Date();
+		var roompref = document.getElementById("roompref").value;
+		var name = document.getElementById("name").value;
+
+		if(checkindate.length == 0){return false;}
+		else if(checkoutdate.length == 0){return false;}
+		else if(isNaN(checkindate.getTime())||isNaN(checkoutdate.getTime())){return false;}
+		else if(checkindate<today){
+			alert("Check-in date must be today or in the future.");
+			return false;
+		}else if(checkindate>=checkoutdate){
+			alert("Check-out date must be after check-in date.");
+			return false;
+		}else if(roompref == ""){return false;}
+		else if(name.length <5){return false;}
+		
+		else{return true;}
+	}
+
+</script>
+</head>
+
+
+<body>
+
+<ul>
+	<li><a href="/home">Home</a></li>
+	<li><a class="active" href="#">Reservation</a></li>
+	<li><a href="/billing">Billing Page</a></li>
+	<li><a href="/bookinghistory">History</a></li>
+	<li><a href="/upcomingbookings">Bookings</a></li>
+
+	<li><a href="/contactsupport">Contact Support</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+<div class="head">	
+	<p><b>Reservation Form</b></p>
+</div>
+<!--
+{% if error %}
+	<p style="color:red;text-align:center;font-size:20px;">No rooms available</p>
+{% endif %}
+-->
+<marquee style="color:red; font-size:20px;"><b>50% OFF on first booking &#x1F389;</b></marquee>
+<div style="float:left;display:flex;width:100%">     
+<div class="formbox">
+<form id="reservationForm" onsubmit="return validateForm()" method="post">
+
+	<div style="float:left;width:30%;">
+	
+	<label for="checkindate">Check-in Date &#128197;</label><br><br>
+	<input type="date" id="checkindate" name="checkindate" required/><br><br><br>
+	</div><div style="float:left;width:30%;"><label for="checkoutdate">Check-out Date &#128197</label><br><br>
+	<input type="date" id="checkoutdate" name="checkoutdate" required/><br><br><br>
+	</div>
+	<div style="float:left;width:30%;">
+	<label for="roompref">Room Preference &#127976;</label><br><br>
+	<select name="roompref" id="roompref" required>
+	<option value="">code</option>
+	<option value="Standard">Standard</option>
+	<option value="Deluxe">Deluxe</option>
+	<option value="Suite">Suite</option>
+	</select><br><br>
+</div>
+	<div style="clear:left;">
+
+	<p style="margin-left:10px;padding-top:50px;margin-bottom:30px;"><b>Personal Information </b></p>
+	<div style="float:left;width:50%;">
+	<label for="name">Name <i class="fa fa-user"></i></label><br>
+	<input type="text" id="name" name="name" minlength="5" maxlength="20" required><br><br>
+	</div>
+	<div style="float:left;width:50%;">
+	<label for="contact">Contact <i class="fa fa-address-book"></i></label><br>
+	<input type="text" id="contact" name="contact" pattern="[6-9]{1}[0-9]{9}" required><br><br>
+	</div>
+	<button type="submit">Book Now</button>
+	
+</form>
+
+</div>
+</div>
+
+</body>
+</html>

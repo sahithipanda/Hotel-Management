@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bookings</title>
+
+
+<style>
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+
+	li{
+		float:left;
+	}
+	li a, log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.head{
+	display:inline-block;
+	width:10%;
+	border-bottom:3px solid #7C7676;
+	color:#696969;
+	margin:10px 20px;
+	font-size:15px;
+	margin-bottom:30px;
+	}
+
+	table{
+		width:100%;
+		border-collapse:collapse;
+		margin-left:30px;
+		margin-top:20px;
+		padding:10px;
+	}
+	table th{background-color:#FFEAEA;padding:10px 30px;}
+	td{text-align:center;padding:10px;border-bottom:1px solid #DBD5D5;}
+	.pending{
+		background-color:#F2ABAB;
+	}
+	.statuspending{
+		background-color:#F3EA59;}
+
+	.approved{
+	background-color:#9DF9EF;
+	}
+
+	.paid{
+	background-color:#C4F359;
+	}
+
+
+</style>
+
+
+<script>
+		
+		
+
+</script>
+
+</head>
+
+
+<body>
+
+<ul>
+	<li><a href="/home">Home</a></li>
+	<li><a href="/reservation">Reservation</a></li>
+	<li><a href="/billing">Billing Page</a></li>
+	<li><a href="/bookinghistory">History</a></li>
+	<li><a class="active" href="#">Bookings</a></li>
+	<li><a href="/contactsupport">Contact Support</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+<div class="head">	
+	<p><b>Upcoming Reservations</b></p>
+</div>
+
+<div id="errMsg" style="display: none;">No Upcoming Bookings</div>
+
+<table id="bookingsTable" style="display: none;">
+
+<thead>
+<tr style="border-bottom:2px solid black;">
+	<th>Reservation ID</th>
+	<th>Booking Date</th>
+	<th>Check-in Date</th>
+	<th>Check-out Date</th>
+	<th>Room Type</th>
+	<th>Room Number</th>
+	<th>Status</th>
+	<th>Payment Status</th>
+</tr>
+
+</thead>
+<tbody>
+	{% for h in upcoming %}
+	<tr>
+		<td>{{h[0]}}</td>
+		<td>{{h[1]}}</td>
+		<td>{{h[2]}}</td>
+		<td>{{h[3]}}</td>
+		<td>{{h[4]}}</td>
+		<td>{{h[5]}}</td>
+		<td {%if h[6]=='pending'%}class="statuspending"{%else%}class="approved"{%endif%}>{{h[6]}}</td>
+		<td {%if h[7]=='pending'%}class="pending" {%else%}class="paid"{%endif%}>{{h[7]}}</td>
+		
+	</tr>
+	{% endfor %}		
+
+</tbody>
+
+</table>
+		
+{% if err %}
+	<script>
+		document.getElementById("bookingsTable").style.display="none";
+		document.getElementById("errMsg").style.display="block";
+	</script>
+{% else %}
+	<script>
+		document.getElementById("bookingsTable").style.display="block";
+		document.getElementById("errMsg").style.display="none";
+	</script>
+{% endif %}
+
+</body>
+</html>

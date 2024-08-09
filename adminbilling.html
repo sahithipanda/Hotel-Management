@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+
+<head><title>Admin Billing Invoice</title>
+
+<style>
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #c92647;
+		font-weight:bold;
+	}
+
+	li{
+		float:left;
+	}
+	li a , log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #e87272;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+
+
+	.bill{
+		margin-top:10px;
+		margin-left:25%;
+		padding:20px;
+		width:80%;
+	}
+	.heading{
+		padding:10px;
+		font-size:15px;
+		font-weight:bold;
+		text-align:center;
+	}
+
+	.info{
+		padding:3px 10px;
+		
+	}
+	
+	table{
+		border-collapse:collapse;
+		
+		width:60%;
+	}
+	button{
+		background-color:#0b8734;
+		margin-left:25%;
+		margin-top:30px;
+		width:10%;
+		color:white;
+		border:none;
+		border-radius:2px;
+	}
+	
+	th{
+		background-color:#868f89;
+		color:white;
+		font-size:20px;
+		padding:10px;
+	}
+	
+	input{
+		border: none;
+        	outline:none;
+        	border-bottom: 1px solid #ccc;
+		padding:10px;
+		
+	}
+
+	label{
+		width:100px;
+		margin-left:30%; 
+	}
+	
+	
+	button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+	width:10%;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<ul>
+	<li><a href="/adminHome">Home</a></li>
+	<li><a href="/adminReservation">Reservation</a></li>
+
+  	<li><a  class="active" href="#">Billing Page</a></li>
+
+  	<li><a href="/adminServices">Services</a></li>
+  	<li><a href="/adminHistory">History</a></li>
+  
+  	<li><a href="/adminBookings">Bookings</a></li>
+	<li><a href="/adminRoomStatus">Room Status</a></li>
+  	<li><a href="/adminContactSupport">Contact Support/Feedback</a></li>
+  	<li><a href="/adminCosts">Costs</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+<div id="billingPage">
+	<div class="Reservation_ID">
+		<form action="/adminBillinginvoice" method="POST">
+			<label  for="Reservation_ID">Reservation ID:</label>
+            <input type="text" id="Reservation_ID" name="Reservation_ID" value="{{Reservation_ID}}"  pattern=".{5,20}" required/>
+			<button style="background-color: #4CAF50; color: white; padding: 10px 10px; border: none; border-radius: 4px; cursor: pointer; margin-left:2%; width:10%;"><b>Search</b></button>
+		</form>
+	</div>
+	<div id="errorMsg" style="display: none;"><p>No Billing Found for the given Reservation ID</p></div>
+
+	<div id="invoice_table" class="bill" style="display:none;">
+		<table >
+			<tr>
+				<th colspan="2">Invoice</th>
+			</tr>
+			<tr style="border-bottom:1px solid black;">
+				<td class="info">Reservation ID</td>
+				<td class="info" style="float:right;">{{Reservation_ID}}</td>
+			</tr>
+			<tr>
+				<td class="heading" colspan="2"><b>User Details<b></td>
+			</tr>
+			<tr>
+				<td class="info">User ID</td>
+				<td class="info" style="float:right;">{{ User_ID }}</td>
+			</tr>
+			<tr>
+				<td class="info">Name</td>
+				<td class="info" style="float:right;">{{name}}</td>
+			</tr>
+			<tr>
+				<td class="info">Mobile Number</td>
+				<td class="info" style="float:right;">{{Mobile_Number}}</td>
+			</tr>
+			<tr>
+				<td class="info">Room Type</td>
+				<td class="info" style="float:right;">{{Room_Type}}</td>
+			</tr>
+			<tr style="border-bottom:1px solid black;">
+				<td class="info">Room Number</td>
+				<td class="info" style="float:right;">{{Room_Number}}</td>
+			</tr>
+			
+			<tr>
+				<td class="heading" colspan="2"><b>Room Charges<b></td>
+			</tr>
+			<tr>
+				<td class="info">Per Day Charges</td>
+				<td class="info" style="float:right;">{{rmch}}</td>
+			</tr>
+			<tr>
+				<td class="info">Number of Days</td>
+				<td class="info" style="float:right;">{{num_days}}</td>
+			</tr>
+			<tr style="border-bottom:1px solid black;">
+				<td class="info"><b>Sub Total</td>
+				<td class="info" style="float:right;">{{subtotal}}</td>
+			</tr>
+			<tr>
+				<td class="heading" colspan="2" ><b>Additional Services<b></td>
+			</tr>
+			<tr>
+				<td class="info">Room Service({{Num_Room_Services}} times)</td>
+				<td class="info" style="float:right;">{{totRmserv}}</td>
+			</tr>
+			<tr>
+				<td class="info">Laundry({{Num_Laundry}} times)</td>
+				<td class="info" style="float:right;">{{totLaund}}</td>
+			</tr>
+			<tr>
+				<td class="info">Food({{Num_Food}} times)</td>
+				<td class="info" style="float:right;">{{totFood}}</td>
+			</tr>
+			<tr style="border-bottom:1px solid black;">
+				<td class="info"><b>Total Additional Services</td>
+				<td class="info" style="float:right;">{{tot_addit}}</td>
+			</tr>
+			<tr>
+				<td class="heading" colspan="2"><b>Taxes<b></td>
+			</tr>
+			<tr>
+				<td class="info">SGST({{tax}} %)</td>
+				<td class="info" style="float:right;">{{tx_val}}</td>
+			</tr>
+			<tr>
+				<td class="info">CGST({{tax}} %)</td>
+				<td class="info" style="float:right;">{{tx_val}}</td>
+			</tr>
+			<tr>
+				<td class="info"><b>Total Taxes</td>
+				<td class="info" style="float:right;">{{ttxx}}</td>
+			</tr>
+			<tr style="background-color:#9bc7aa;color:black;">
+				<td style="font-size:20px;padding:10px;"><strong> Total Bill</strong></td>
+				<td style="float:right;padding:10px;">{{totalbill}}</td>
+			</tr>
+			
+		</table>
+		<form action="/updateBilling" method="POST" onsubmit="onclick1();">
+			<input type="hidden" id="Reservation_ID" name="Reservation_ID" value="{{Reservation_ID}}"/>
+			<input type="hidden" id="totalbill" name="totalbill" value="{{totalbill}}"/>
+			<input type="submit" value="Generate Invoice"/>
+		</form>
+	</div>
+</div>
+
+<script>
+	function onclick1(){
+		window.print();
+	}
+</script>
+
+
+{% if(err == "one") %}
+<script>
+	document.getElementById("errorMsg").style.display="none";
+	document.getElementById("invoice_table").style.display="none";
+</script>
+{% elif(err == "two") %}
+<script>
+	document.getElementById("errorMsg").style.display="block";
+	document.getElementById("invoice_table").style.display="none";
+</script>
+{% else %}
+<script>
+	document.getElementById("errorMsg").style.display="none";
+	document.getElementById("invoice_table").style.display="block";
+</script>
+{% endif %}
+</body>
+</html>

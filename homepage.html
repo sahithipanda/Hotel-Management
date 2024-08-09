@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head><title>Home Page</title>
+<style>
+	
+	.container{
+		text-align:center;
+		padding:20px 40px;
+		display:inline-block;
+	}
+	.intro{
+		float:left;
+		width:50%;
+	}
+	
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+
+	li{
+		float:left;
+	}
+	li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.head{
+	display:inline-block;
+	width:95%;
+	background-color:#7077d4;
+	color:white;
+	border-radius:20px;
+	margin:10px 10px;
+	padding: 0px 10px;
+	font-size:15px;
+	}
+.why{
+
+border-radius:20px;
+background-color:#ced0f2;
+width:95%;
+padding:10px;
+margin:10px 10px;
+line-height:1.5;
+}
+.why::after{
+content: "";
+clear: both;
+display: table;
+}
+.img1{
+float:right;
+border-radius:20px;
+
+}
+.heading{
+display:inline-block;
+	width:95%;
+	background-color:#e8808c;
+	color:white;
+	border-radius:20px;
+	margin:10px 10px;
+	padding: 0px 10px;
+	font-size:15px;
+}
+.card_container{
+display:flex;
+justify-content: center;
+flex-wrap: wrap;
+margin-top:100px;
+}
+.card{
+width:325px;
+padding:20px;
+margin: 28px;
+display:inline-block;
+background-color:#ced0f2 ;
+border-radius: 8px;
+overflow: hidden;
+
+box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+.card img{
+width: 100%;
+border-radius: 8px;
+}
+.card-content{
+padding:16px;
+}
+.card-content h3{
+font-size: 20px;
+margin-bottom: 5px;
+}
+.card-content p{
+line-height:1.3;
+}
+.card-content .btn{
+display: inline-block;
+background-color:#e8808c;
+padding:8px 16px;
+text-decoration: none;
+border-radius: 4px;
+margin-top:16px;
+}
+.suite{
+height:218px;
+}
+</style>
+
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="#">Home</a></li>
+  <li><a href="/reservation">Reservation</a></li>
+  <li><a href="/billing">Billing Page</a></li>
+  <li><a href="/bookinghistory">History</a></li>
+  <li><a href="/upcomingbookings">Bookings</a></li>
+  <li><a href="/contactsupport">Contact Support</a></li>
+  <li><a href="/logout">Logout</a></li>
+  <li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+</ul>
+	<div class="container">
+		<div class="intro">
+			<img src="https://tse2.mm.bing.net/th/id/OIP.gawUv7Tg7R3amnWgoNmefgHaF2?rs=1&pid=ImgDetMain" alt="Hotel Image">
+		</div>
+		<div class="intro">
+			
+			<p style="padding-top:100px;font-size:50px; color:#7077d4; "><b><i> "Where every stay is a story worth sharing -  Let us manage your hotel journey"</i></b></p>
+		</div>
+
+	</div>
+<br><br>
+<div class="heading">	
+	<p><b>WHY ABC HOTEL?</b></p>
+</div>
+<div class="why">
+<img class="img1" src="../static/h3.jpg" alt="hotel img" width="380" height="210">
+Our hotel represents the pinnacle of luxury and service in the hospitality industry,
+offering top-tier amenities, exceptional service, and premium accommodation. They are important as they set the standard for high-end travel experiences,
+often serving as landmarks and playing a significant role in tourism and local economies
+You’re in for a treat! A stay in our hotel is an experience like no other, offering top-of-the-line amenities and personalized services that go above and beyond your expectations. 
+However, not all hotels are created equal, and choosing the right one can make all the difference in your vacation. To ensure a truly memorable stay, it’s important to consider several factors when selecting a our hotel. 
+From the location to the amenities and personalized services, every detail matters. After all, your hotel will be your temporary home, where you’ll come back to relax and unwind after a day of exploring your destination.
+A comfortable, welcoming, and convenient hotel can enhance your overall experience and create unforgettable memories... 
+
+</div>
+<div class="heading">	
+	<p><b>ROOM AND RATES</b></p>
+</div>
+<div class="card-container">
+
+<div class="card">
+<img src="../static/b11.jpg">
+<div class="card-content">
+<h3>Standard - &#8377;1800</h3>
+<p>A single room is a space that will be available for you and you only.
+ It's a private space where the bed, desk, cupboards and other amenities
+Our hotel represents the pinnacle of luxury and service. </p>
+<a href="/reservation" class="btn">Book Now</a>
+</div>
+</div>
+
+<div class="card">
+<img src="../static/h2.jpg">
+<div class="card-content">
+<h3>Deluxe - &#8377;2500</h3>
+<p>A deluxe room is a luxury type of hotel room with ample space,
+ overlooking a beautiful panorama, and offering additional services
+Our hotel represents the pinnacle of luxury and service. </p>
+<a href="/reservation" class="btn">Book Now</a>
+</div>
+</div>
+
+<div class="card">
+<img class="suite" src="../static/b3.jpg">
+<div class="card-content">
+<h3>Suite - &#8377;3500</h3>
+<p>One room is usually a living area with a couch that converts to a bed,
+ a separate TV, and sometimes a kitchen or kitchenette.
+Our hotel represents the pinnacle of luxury and service.</p>
+<a href="/reservation" class="btn">Book Now</a>
+</div>
+</div>
+
+
+</div>
+</body>
+</html>

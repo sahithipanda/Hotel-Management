@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+
+<head><title>Room Status</title>
+
+<style>
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #c92647;
+		font-weight:bold;
+	}
+
+	li{
+		float:left;
+	}
+	li a , log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #e87272;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+
+	
+	td{
+		text-align:center;
+	}
+
+	
+	th{
+		background-color:#868f89;
+		color:white;
+		font-size:20px;
+		padding:10px;
+	}
+	
+	input{
+		border: none;
+        	outline:none;
+        	border-bottom: 1px solid #ccc;
+		padding:10px; 
+	}
+
+	label{
+		width:100px;
+	}
+	
+		
+	
+	button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+	float:right;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+
+	.container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+	
+	#roomStatusTable{
+		margin-left:33%;
+	}
+	   .vacant {
+        color: white;
+	font-weight:bold;
+	background-color:green;
+    }
+    .booked {
+		color: white;
+	font-weight:bold;
+	background-color:red;
+	}
+      
+</style>
+
+</head>
+
+<body>
+
+<ul>
+	<li><a href="/adminHome">Home</a></li>
+    <li><a href="/adminReservation">Reservation</a></li>
+    <li><a href="/adminBilling">Billing Page</a></li>
+    <li><a href="/adminServices">Services</a></li>
+    <li><a href="/adminHistory">History</a></li>
+    <li><a href="/adminBookings">Bookings</a></li>
+    
+    <li><a class="active" href="#">Room Status</a></li>
+
+  	<li><a href="/adminContactSupport">Contact Support/Feedback</a></li>
+  	<li><a href="/adminCosts">Costs</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+
+<div id="historyPage">
+    <div class="container">
+        <form id="roomStatusForm" action="/adminRoomStatusData" method="POST">
+            <label for="CustomerID">Customer ID:</label>
+            <input type="text" id="CustomerID" name="CustomerID">
+            <button type="submit">Submit</button>
+        </form>
+       
+    </div>
+ <div id="roomStatusTable"></div>
+</div>
+
+<script>
+    document.getElementById('roomStatusForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var CustomerID = document.getElementById('CustomerID').value;
+        
+
+        var roomStatusData = [
+            { CustomerID: 98765, status: 'vacant', floor: '1st', price: '₹1500' },
+            { CustomerID: 98764, status: 'booked', floor: '2nd', price: '₹2200' }
+        ];
+        displayRoomStatus(roomStatusData, CustomerID);
+    });
+
+    function displayRoomStatus(data, CustomerID) {
+        var roomStatusTable = document.getElementById('roomStatusTable');
+        roomStatusTable.innerHTML = '';
+        var found = false;
+        data.forEach(function(room) {
+            if (room.CustomerID == CustomerID) {
+                found = true;
+                var table = '<table>';
+                table += '<tr><th>Customer ID</th><th>Room Availability</th><th>Floor</th><th>Price</th></tr>';
+                table += '<tr>';
+                table += '<td>' + room.CustomerID + '</td>';
+                table += '<td class="' + room.status + '">' + room.status + '</td>';
+                table += '<td>' + room.floor + '</td>';
+                table += '<td>' + room.price + '</td>';
+                table += '</tr>';
+                table += '</table>';
+                roomStatusTable.innerHTML = table;
+            }
+        });
+        if (!found) {
+            roomStatusTable.innerHTML = '<p>No room status found for the provided customer ID.</p>';
+        }
+    }
+</script>
+
+</body>
+</html>

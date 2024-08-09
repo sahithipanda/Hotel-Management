@@ -1,0 +1,199 @@
+<html>
+	<head>
+		<title>Servies Page</title>
+		<style>
+			.head{
+	display:inline-block;
+	width:15%;
+	border-bottom:3px solid #7C7676;
+	color:#696969;
+	margin:10px 20px;
+	font-size:15px;
+	margin-bottom:30px;
+	}
+
+
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #c92647;
+		font-weight:bold;
+	}
+
+	li{
+		float:left;
+	}
+	li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active) {
+  		background-color: #e87272;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+
+		
+input{
+		border: none;
+        	outline:none;
+        	border-bottom: 1px solid #ccc;
+		padding:10px;
+		
+	}
+input[type="submit"]{background-color:#73C6E7;color:white;font-weight:bold;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+	margin-left:42%;
+	margin-top:2%;
+	width:10%;}
+	
+	label{
+		width:100px;
+		margin-left:30%; 
+	}
+	.container{
+	margin-top:4%;
+font-size:15px;
+	}
+	
+	button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+	width:10%;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+.inf label{float:left; width:15%;font-weight:bold;}
+			
+		</style>
+	</head>
+	<body>
+		
+				<ul>
+  <li><a href="/adminHome">Home</a></li>
+  <li><a href="/adminReservation">Reservation</a></li>
+  <li><a href="/adminBilling">Billing Page</a></li>
+  <li><a class="active" href="#">Services</a></li>
+  <li><a href="/adminHistory">History</a></li>
+  
+  <li><a href="/adminbookings">Bookings</a></li>
+<li><a href="/adminroomstatus">Room Status</a></li>
+  <li><a href="/admincontactsupport">Contact Support/Feedback</a></li>
+  <li><a href="/adminCosts">Costs</a></li>
+  <li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+			
+		<div class="head">	
+	<p><b>Update User Services Used</b></p>
+</div>	
+<div class="userid">
+
+		<form action="/adminServicesValidate" method="POST">
+			<label  for="resID">Reservation ID:</label>
+			<input type="text" id="resID" name="resID" placeholder="Enter ReservationID" value="{{resID}}" required/>
+			<button style="background-color: #4CAF50;
+        color: white;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+	margin-left:2%;
+	width:10%;"><b>Search</b></button>
+		</form>
+
+
+		<form id="updateForm" action="/adminServicesUpdate" method="POST" style="display:none">
+			
+
+			<div class="container"> 
+
+	<div class="inf">
+	<br><label><br>Room Services Used : </label></div>
+	<div class="in"><input 	type="button" value="-" onclick="subs1();"/>
+				<input type="number" id="rmsu" name="rmsu" value="{{rsused}}" onchange="validate1();"/>
+				<input type="button" value="+" onclick="adds1();"/></div>
+
+			<div class="inf">
+	<br><label><br>Laundry Services Used : </label></div><div class="in"><input type="button" value="-" onclick="subs2();"/>
+				<input type="number" id="laundry" name="laundry" value="{{lused}}" onchange="validate2();"/>
+				<input type="button" value="+" onclick="adds2();"/>
+</div>
+			<div class="inf">
+	<br><label><br>Food : </label></div><div class="in"><input type="button" value="-" onclick="subs3();"/>
+				<input type="number" id="food" name="food" value="{{fused}}" onchange="validate3();"/>
+				<input type="button" value="+" onclick="adds3();"/>
+</div>	<br><input type="submit" Value="Update"/>
+<div class="inf">
+<input type="hidden" id="resID" name="resID"  value="{{resID}}"  required/></div>
+		</form>
+		<script>
+			{% if invalid %}
+				alert("Invalid ReservationID");
+			{% endif %}
+
+			{% if valid %}
+				document.getElementById("updateForm").style.display = "block";
+			{% endif %}
+
+			{% if aler %}
+				alert("Updated Successfully.")
+			{% endif %}
+
+			function subs1(){
+				if(parseInt(document.getElementById("rmsu").value) <= 0){alert("Value cannot be less than 0");
+				}else{document.getElementById("rmsu").value = parseInt(document.getElementById("rmsu").value)-1;}
+			}
+			function adds1(){
+				document.getElementById("rmsu").value = parseInt(document.getElementById("rmsu").value)+1;
+			}
+			function subs2(){
+				if(parseInt(document.getElementById("laundry").value) <= 0){alert("Value cannot be less than 0");
+				}else{document.getElementById("laundry").value = parseInt(document.getElementById("laundry").value)-1;}
+			}
+			function adds2(){
+				document.getElementById("laundry").value = parseInt(document.getElementById("laundry").value)+1;
+			}
+			function subs3(){
+				if(parseInt(document.getElementById("food").value) <= 0){alert("Value cannot be less than 0");
+				}else{document.getElementById("food").value = parseInt(document.getElementById("food").value)-1;}
+			}
+			function adds3(){
+				document.getElementById("food").value = parseInt(document.getElementById("food").value)+1;
+			}
+			function validate1(){
+				if(parseInt(document.getElementById("rmsu").value) <= 0){
+					alert("Value cannot be less than 0");
+					document.getElementById("rmsu").value = 0;
+				}
+			}
+			function validate2(){
+				if(parseInt(document.getElementById("laundry").value) <= 0){
+					alert("Value cannot be less than 0");
+					document.getElementById("laundry").value = 0;
+				}
+			}
+			function validate3(){
+				if(parseInt(document.getElementById("food").value) <= 0){
+					alert("Value cannot be less than 0");
+					document.getElementById("food").value = 0;
+				}
+			}
+		</script>
+	</body>
+</html>

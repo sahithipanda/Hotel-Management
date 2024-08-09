@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Pending Approvals</title>
+<style>
+	
+
+	
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #c92647;
+		font-weight:bold;
+	}
+
+	li{
+		float:left;
+	}
+	li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active) {
+  		background-color: #e87272;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	
+	
+	table{
+		margin-top:30px;
+		margin-left:25%;
+		border-collapse:collapse;
+		width:50%;
+		text-align:center;
+	}
+	th,td{
+		border: 1px solid #dddddd;
+		padding:8px;
+	}
+	th{
+		background-color:#868f89;
+		color:white;
+	}
+	.choose{
+		margin-top:50px;
+		margin-left:35%;
+		
+	}
+	button{
+		background-color:#03a9fc;
+		
+		padding:10px;
+		width:100%;
+		color:white;
+		border:none;
+		border-radius:20px;
+	}
+</style>
+
+
+</head>
+<body>
+
+<ul>
+	<li><a href="/adminHome">Home</a></li>
+
+	<li><a class="active" href="#">Reservation</a></li>
+
+	<li><a href="/adminBilling">Billing Page</a></li>
+	<li><a href="/adminServices">Services</a></li>
+	<li><a href="/adminHistory">History</a></li>
+	<li><a href="/adminbookings">Bookings</a></li>
+  	<li><a href="/adminroomstatus">Room Status</a></li>
+	<li><a href="/admincontactsupport">Contact Support/Feedback</a></li>
+	<li><a href="/adminCosts">Costs</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+
+{% if nothing %}
+	<h3>No new reservations</h3>
+{% else %}
+	<table id="reservations">
+
+	<thead>
+	<tr style="border-bottom:2px solid black;">
+		<th>User ID</th>
+			<th>Reservation ID</th>
+			<th>Room Type</th>
+		<th>Check-in Date</th>
+		<th>Check-out Date</th>
+		<th>Action</th>
+	</tr>
+
+	</thead>
+	<tbody>
+		{% for reservation in reservations %}
+		<tr>
+			<td>{{reservation[0]}}</td>
+			<td>{{reservation[1]}}</td>
+			<td>{{reservation[2]}}</td>
+			<td>{{reservation[3]}}</td>
+			<td>{{reservation[4]}}</td>
+			<td><form  method="post" action="/adminReservationAction">
+				<input type="hidden" name="Reservation_ID" value="{{reservation[1]}}">
+				<input type="submit" value="Approve/Reject"/>
+			</form>
+			</td>
+		</tr>
+		{% endfor %}		
+</tbody>
+</table>
+{% endif %}
+</body>
+</html>

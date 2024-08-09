@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+
+<head><title>Payment</title>
+
+<style>
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #7077d4;
+	}
+	
+
+	
+
+	li{
+		float:left;
+	}
+	li a, log a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active),log a:hover:not(.active) {
+  		background-color: #8569f5;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	.container{
+		margin:50px 50px;
+		width:60%;
+		border:1px solid black;
+		
+	}
+
+	.heading{
+		padding:10px;
+		font-size:15px;
+	}
+	label{
+		width:100px;
+		padding-left:10px;
+	}
+	input{
+		border: none;
+        	outline:none;
+        	border-bottom: 1px solid #ccc;
+		padding-bottom:10px;
+		padding-top:10px;
+		margin-left:10px;
+		width:60%; 
+		text-align:left;
+	}
+
+	.info{
+		padding:3px 10px;
+	}
+	
+	input[type="submit"]{
+		text-align: center;
+		background-color:#03a9fc;
+		margin-left:10px;
+		margin-top:20px;
+		padding:10px;
+		width:80%;
+		color:white;
+		border:none;
+		border-radius:10px;
+	}
+	.pay{
+		display: block;
+  		color: white;
+  		padding: 10px 10px;
+  		text-decoration: none;
+	}
+	.head{
+	display:inline-block;
+	width:95%;
+	background-color:#7077d4;
+	color:white;
+	border-radius:20px;
+	margin:20px 30px;
+	padding: 0px 10px;
+	font-size:15px;
+	}
+	.formbox{
+		
+		width:50%;
+		margin-left:140px;
+		margin-right:10px;
+		display:inline-block;
+		padding:10px 0px 30px 60px;
+ 		box-shadow: 5px 5px 20px #aeaeae;
+		text-align:left;
+	}
+
+	
+</style>
+
+</head>
+
+<body>
+
+<ul>
+	<li><a href="/home">Home</a></li>
+	<li><a href="/reservation">Reservation</a></li>
+	<li><a class="active" href="#">Billing Page</a></li>
+	<li><a href="/bookinghistory">History</a></li>
+	<li><a href="/upcomingbookings">Bookings</a></li>
+	
+	<li><a href="/contactsupport">Contact Support</a></li>
+	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+
+<div class="head">
+	<p><b>Payment</b></p>
+
+</div>
+  <div style="float:left;display:flex;width:100%">     
+	<div class="formbox">
+		<p style="padding-left:10px;padding-bottom:30px; color:blue;text-decoration:underline;">Pay by Credit Card</p>
+		<form id="loginform"  method="post" action="/credit">
+<input type="text" name="totalbill" value="{{totalbill}}" style="display:none"/>
+<input type="text" name="Reservation_ID" value="{{Reservation_ID}}" style="display:none"/>
+ 			<label for="cardno">Card No</label><br>
+			<input type="text" id="cardno" name="cardno" minlength=16 maxlength=16 required ><br><br>
+			<label for="cardholdername">Card Holder Name</label><br>
+			<input type="cardholdername" id="cardholdername" minlength=10 name="cardholdername" required ><br><br>
+			<label for="expirydate">Expiry Date</label><br><br>
+			<div style="display:flex;width:60%;">
+				<div style="clear:left;width:30%">
+					<input style="text-align:center;" type="text"  id="month" minlength=2 maxlength=2 name="month" placeholder="MM" required ><br><br>
+				</div><br>
+				<div style="float:left;width:30%;">
+					<input style="text-align:center;" type="text"  id="year" minlength=2 maxlength=2 name="year" placeholder="YY" required ><br><br>
+				</div><br>
+			</div>
+			<label for="cvv">CVV</label><br>
+			<input style="width:20%;"  type="text" id="cvv" name="cvv" minlength=3 minlength=2 maxlength=3 required ><br><br>
+			<input type="submit" style="background-color:#db9802" value="Make Payment" />
+	
+		</form>
+	</div>
+	<div style="float:left;margin:40px;width:40%;padding:40px;">
+		<p style="display:inline-block;background-color:#99e6f7;padding:20px;width:60%;">Payment Amount:{{totalbill}}	</p>
+	<div>
+<div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<html>
+	<head>
+		<title>Servies Cost Edit Page</title>
+		<style>
+			div ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #c92647;
+		font-weight:bold;
+	}
+
+	div ul li{
+		float:left;
+	}
+	div ul li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	div ul li a:hover:not(.active) {
+  		background-color: #e87272;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	input[type="submit"]{background-color:#79E773;color:white;font-weight:bold;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+	margin-left:42%;
+	margin-top:2%;
+	width:10%;}
+	input{
+		border: none;
+        	outline:none;
+        	border-bottom: 1px solid #ccc;
+		padding:10px;
+		
+	}
+	.head{
+	display:inline-block;
+	width:11%;
+	border-bottom:3px solid #7C7676;
+	color:#696969;
+	margin:10px 20px;
+	font-size:15px;
+	margin-bottom:30px;
+	}
+
+	label{
+		width:100px;
+		margin-left:30%; 
+	}
+	
+	.inf label{float:left; width:15%;font-weight:bold;}
+	
+
+		</style>
+
+		<script>
+			function validate1(){
+				var standard = document.getElementById("standard").value;
+				var deluxe = document.getElementById("deluxe").value;
+				var suite = document.getElementById("suite").value;
+				var rmserv = document.getElementById("rmserv").value;
+				var laundry = document.getElementById("laundry").value;
+				var food = document.getElementById("food").value;
+				var tax = document.getElementById("tax").value;
+				if(standard <= 0){
+					alert("Standard Room Cost cannot be less than 0");
+					document.getElementById("standard").value = 1;
+					return false;
+				}else if(deluxe <= 0){
+					alert("Deluxe Room Cost cannot be less than 0");
+					document.getElementById("deluxe").value = 1;
+					return false;
+				}else if(suite  <= 0){
+					alert("Suite Room Cost cannot be less than 0");
+					document.getElementById("suite").value = 1;
+					return false;
+				}else if(rmserv <= 0){
+					alert("Room Service Cost cannot be less than 0");
+					document.getElementById("rmserv").value = 1;
+					return false;
+				}else if(laundry <= 0){
+					alert("Laundry Cost cannot be less than 0");
+					document.getElementById("laundry").value = 1;
+					return false;
+				}else if(food <= 0){
+					alert("Food Cost cannot be less than 0");
+					document.getElementById("food").value = 1;
+					return false;
+				}else if(tax <= 0){
+					alert("Taxs cannot be less than 0");
+					document.getElementById("tax").value = 1;
+					return false;
+				}else{return true;}
+
+			}
+		
+		</script>
+	</head>
+	<body><div>
+<ul>
+	<li><a href="/adminHome">Home</a></li>
+	<li><a href="/adminReservation">Reservation</a></li>
+  	<li><a href="/adminBilling">Billing Page</a></li>
+  	<li><a href="/adminServices">Services</a></li>
+  	<li><a href="/adminHistory">History</a></li>
+  	<li><a href="/adminBookings">Bookings</a></li>
+  	<li><a href="/adminRoomStatus">Room Status</a></li>
+  	<li><a href="/adminContactSupport">Contact Support/Feedback</a></li>
+
+  	<li><a class="active" href="#">Costs</a></li>
+
+  	<li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+  	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul></div>
+
+<div class="head">	
+	<p><b>Update Services Cost</b></p>
+</div>	
+
+		
+
+		<form action="/updateCosts" method="POST" onsubmit="return validate1();">
+
+<div class="container"> 
+
+<div class="inf">
+<br><label>Standard Room Cost : </label><div><div class="in">
+<input type="number" id="standard" name="standard" value="{{standard}}"/></li>
+</div>
+		<div class="inf">	<br><label>Deluxe Room Cost : </label></div><div class="in"><input type="number" id="deluxe" name="deluxe" value="{{deluxe}}"/>
+</div>
+
+
+			<div class="inf"><br><label>Suite Room Cost : </label></div><div class="in"><input type="number" id="suite" name="suite" value="{{suite}}"/></div>
+			<div class="inf"><br><label>Room Service Cost : </label></div><div class="in"><input type="number" id="rmserv" name="rmserv" value="{{rmserv}}"/></div>
+			<div class="inf"><br><label>Laundry Cost : </label></div><div class="in"><input type="number" id="laundry" name="laundry" value="{{laundry}}"/></div>
+			<div class="inf"><br><label>Food Cost : </label></div><div class="in"><input type="number" id="food" name="food" value="{{food}}"/></div>
+			<div class="inf"><br><label>Tax(in % ) : </label></div><div class="in"><input type="number" id="tax" name="tax" value="{{tax}}"/></div>
+</div>
+			<br><input type="submit" value="update"/>
+		</form>
+	</body>
+</html>

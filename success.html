@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Registration Successful</title>
+	<style>
+		.container{
+			text-align:center;
+			padding:20px 40px;
+			display:inline-block;
+		}
+		.intro{
+			
+			float:left;
+			width:50%;
+		}
+	</style>
+</head>
+
+<body>
+	
+	
+	<div class="container">
+		<div class="intro">
+			<img src="https://tse2.mm.bing.net/th/id/OIP.gawUv7Tg7R3amnWgoNmefgHaF2?rs=1&pid=ImgDetMain" alt="Hotel Image">
+		</div>
+		<div class="intro">
+			
+			<h2 style="text-align:center; margin-top:60px;margin-bottom:10px;margin-left:30px;color:#e04d4a;">Registration Successful!!</h1>
+	<p style="padding-top:2px;font-size:20px; color:#7077d4; ">User ID is: {{userId}}</p><br>
+	<p style="font-size:20px; color:#7077d4; ">Username is: {{username}}</p>
+		</div>
+		<a href="{{ url_for('main')}}">Click Here to Login</a>
+
+	</div>
+
+	
+
+</body>
+
+</html>

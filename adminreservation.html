@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Reservation Form</title>
+<style>
+	
+
+	
+	ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #c92647;
+		font-weight:bold;
+	}
+
+	li{
+		float:left;
+	}
+	li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}
+	li a:hover:not(.active) {
+  		background-color: #e87272;
+	}
+
+	.active {
+ 		 background-color: #e8808c;
+	}
+	
+	
+	table{
+		margin-top:30px;
+		margin-left:25%;
+		border-collapse:collapse;
+		width:50%;
+		text-align:center;
+	}
+	th,td{
+		border: 1px solid #dddddd;
+		padding:8px;
+	}
+	th{
+		background-color:#868f89;
+		color:white;
+	}
+	.choose{
+		margin-top:50px;
+		margin-left:35%;
+		
+	}
+	button{
+		background-color:#03a9fc;
+		margin-left:42%;
+		margin-top:60px;
+		padding:10px;
+		width:15%;
+		color:white;
+		border:none;
+		border-radius:20px;
+	}
+</style>
+
+
+</head>
+<body>
+
+<ul>
+  <li><a href="/adminHome">Home</a></li>
+  <li><a class="active" href="#">Reservation</a></li>
+  <li><a href="/adminBilling">Billing Page</a></li>
+  <li><a href="/adminServices">Services</a></li>
+  <li><a href="/adminHistory">History</a></li>
+  
+  <li><a href="/adminbookings">Bookings</a></li>
+<li><a href="/adminroomstatus">Room Status</a></li>
+  <li><a href="/admincontactsupport">Contact Support/Feedback</a></li>
+  <li><a href="/adminCosts">Costs</a></li>
+  <li style="float:right;padding:14px 20px; color:white;font-size:16px;"><b><i>Welcome {{Name}}</i></b></li>
+	<li style="float:right;"><a href="/logout">Logout</a></li>
+</ul>
+<table id="data">
+	<tr>
+		<th colspan="2">Reservation Details</th>
+
+	<tr>
+		<td><p><b>User ID</b></p></td><td><p><span id="UserID"></span></p></td>
+	</tr>
+	<tr>
+		<td><p><b>Room Type</b></p></td><td><span id="Roompref"></span></td>
+	</tr>
+	<tr>
+		<td><p><b>Check-in Date</b></p></td><td><span id="Check_in"></span></td>
+	</tr>
+	<tr>
+		<td><p><b>Check-out Date</b></p></td><td><span id="Check_out"></span></td>
+	</tr>
+</table>
+<div class="choose">
+	<form id="reservationStatus" action="/updateReservation" method="POST" onsubmit="return validate();">
+	<input type="hidden" name="Reservation_ID" value="{{Reservation_ID}}"/>
+	<label for="approvalstatus"><b>Approval Status</b></label>
+	<select id ="approvalstatus" name="approvalstatus" style="margin-left:30px;width:30%;
+		border:none;
+		border-bottom: 1px solid #ccc;
+		padding:10px;">
+		<option value="">
+		</option><option value="approved">Approve</option>
+
+		<option value="rejected">Reject</option>
+	</select><br>
+	</form>
+</div>
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+	const userSpan=document.getElementById("UserID");
+	const roomType=document.getElementById("Roompref");
+	const checkIn=document.getElementById("Check_in");
+	const checkOut=document.getElementById("Check_out");
+	const approvalstatus=document.getElementById("approvalstatus");
+
+	const reservation_details={
+		UserID:"{{details[0]}}",
+		Roompref:"{{details[1]}}",
+		Check_in:"{{details[2]}}",
+		Check_out:"{{details[3]}}",
+		status:false
+	};
+
+	userSpan.textContent=reservation_details.UserID;
+	roomType.textContent=reservation_details.Roompref;
+	checkIn.textContent=reservation_details.Check_in;
+	checkOut.textContent=reservation_details.Check_out;
+	approvalstatus.addEventListener("change",function(){
+			const approval_status=approvalstatus.value;
+			if(approval_status==="approved"){
+				reservation_details.status=true;
+				var form = document.getElementById("reservationStatus");
+				
+				var dynamicField = document.getElementById("rejectionDescription");
+				if (dynamicField) {
+					form.removeChild(document.getElementById("submitButton"))
+    				form.removeChild(dynamicField);
+    			}
+				var sub = document.createElement("input");
+				sub.setAttribute("type", "submit");
+				sub.setAttribute("id", "submitButton");
+				form.appendChild(sub);
+			}
+			else if(approval_status==="rejected"){
+				reservation_details.status=false;
+				var form = document.getElementById("reservationStatus");
+				var dynamicField = document.getElementById("submitButton");
+				if (dynamicField) {
+    				form.removeChild(dynamicField);
+			    }
+
+				var rejectionDescriptionInput = document.createElement("input");
+    			rejectionDescriptionInput.setAttribute("type", "text");
+    			rejectionDescriptionInput.setAttribute("name", "rejectionDescription");
+    			rejectionDescriptionInput.setAttribute("id", "rejectionDescription");
+				rejectionDescriptionInput.setAttribute("placeholder", "Rejection Description");
+    			rejectionDescriptionInput.required = true;
+    			form.appendChild(rejectionDescriptionInput);
+				var sub = document.createElement("input");
+				sub.setAttribute("type", "submit");
+				sub.setAttribute("id", "submitButton");
+				form.appendChild(sub);
+			}else{
+				var form = document.getElementById("reservationStatus");
+				var dynamicField = document.getElementById("submitButton");
+				if (dynamicField) {
+    				form.removeChild(dynamicField);
+			    }
+				var dynamicField = document.getElementById("rejectionDescription");
+				if (dynamicField) {
+    				form.removeChild(dynamicField);
+			    }
+			}
+		}
+	);
+});
+
+function validate(){
+	alert("Reservation Details Updated.");
+	return true;
+}
+</script>
+
+
+</body>
+</html>
