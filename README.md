@@ -8,17 +8,22 @@ Room Booking System: Allows customers to book rooms based on availability.
 Customer Management: Manage customer details, check-in/check-out, and billing information.
 Billing System: Generate invoices and manage payment records.
 Admin Panel: An interface for hotel management to oversee operations and manage resources.
+
 **Technologies Used**
+
 Frontend-
 HTML5: For structuring the web pages.
 CSS3: For styling and designing the web pages.
 JavaScript: For interactive elements and client-side validation.
+
 Backend-
 Flask: A lightweight Python web framework used to build the backend of the application.
 SQL: For managing the database, storing and retrieving data.
 PDBC: For connecting the application to the database.
+
 Database-
 SQL Database: Used to store all data related to customers, staff, room availability, and billing.
+
 **Installation**
 Prerequisites
 Python 3.x: Ensure Python is installed on your system.
